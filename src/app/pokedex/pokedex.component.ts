@@ -10,7 +10,9 @@ import { PokeapiService } from '../pokeapi.service';
 export class PokedexComponent implements OnInit {
 
   conteo: number = 0;
-  cantidadMostrar: number = 0;
+  cantidadMostrar: number = 20;
+  numeroPagina: number = 0;
+
   resumenPokemon: IResumenPokemon[] = [];
   cargando: boolean = true;
 
@@ -23,7 +25,7 @@ export class PokedexComponent implements OnInit {
   actualizarInformacion(){
     //actualizar informacion
     this.cargando = true;
-    this.pokeapiService.getListadoPokemons(this.cantidadMostrar).subscribe(respuesta =>{
+    this.pokeapiService.getListadoPokemons(this.cantidadMostrar, (this.numeroPagina > 0) ? this.cantidadMostrar * this.numeroPagina : undefined).subscribe(respuesta =>{
       this.conteo = respuesta.count;
       this.resumenPokemon = respuesta.results;
       this.cargando = false;

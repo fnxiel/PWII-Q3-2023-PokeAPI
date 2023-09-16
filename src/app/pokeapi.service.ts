@@ -13,8 +13,12 @@ export class PokeapiService {
 
   constructor(public cliente: HttpClient) { }
 
-  getListadoPokemons(limit?: number): Observable<IPokedex>{
-    const url = (limit) ? `${this.urlBase}/pokemon?limit=${limit}` : `${this.urlBase}/pokemon`
+  getListadoPokemons(limit?: number, offset?: number): Observable<IPokedex>{
+    let url = `${this.urlBase}/pokemon`;
+    if(limit || offset) url = url.concat('?');
+    url = url.concat((limit) ? `limit=${limit}` : '');
+    url = url.concat((offset) ? `&offset=${offset}` : '');
+    console.log(url);
     return this.cliente.get<IPokedex>(url)
   }
 

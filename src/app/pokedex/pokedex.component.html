@@ -5,11 +5,13 @@
 <div>
   <label for="cantidadMostrar">Cantidad a mostrar</label>
   <input id="cantidadMostrar" type="number" [(ngModel)]="cantidadMostrar" />
+  <label for="numeroPagina">Numero de pagina</label>
+  <input id="numeroPagina" type="number" [(ngModel)]="numeroPagina" />
   <button (click)="actualizarInformacion()">Actualizar</button>
 </div>
 
-<div *ngFor="let resumen of resumenPokemon">
-    {{resumen.name}} - {{resumen.url}}
+<div *ngFor="let resumen of resumenPokemon" class="d-flex justify-content-center flex-wrap">
+  <app-pokemon [resumenPokemon]="resumen"></app-pokemon>
 </div>
 
 <div *ngIf="cargando">
